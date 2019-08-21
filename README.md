@@ -1,9 +1,10 @@
 # [webpack-alioss-plugin](https://git.io/fhMkf)
 
 [![Travis CI](https://img.shields.io/travis/borenXue/webpack-alioss-plugin/master.svg)](https://travis-ci.org/borenXue/webpack-alioss-plugin)
+[![Travis CI](https://img.shields.io/travis/GuiGu0101/webpack-qcloud-cos-plugin/master.svg)](https://travis-ci.org/GuiGu0101/webpack-qcloud-cos-plugin)
 [![node version](https://img.shields.io/node/v/webpack-alioss-plugin.svg)](https://nodejs.org)
 <span style="position:relative;top: -4px;margin-left: 8px;">
-  <a target="_blank" href="https://git.io/fhMTi">更新记录</a>
+  <a target="_blank" href="https://git.io/fjb1l">更新记录</a>
   <a target="_blank" href="https://git.io/fhMT0">测试报告</a>
   <a target="_blank" href="https://git.io/fhMTa">eslint 报告</a>
 </span>

@@ -1,14 +1,14 @@
 {
   "name": "webpack-cos-plugin",
-  "version": "2.2.4",
+  "version": "1.0.0",
   "description": "Ali oss-webpack auto upload files plugin ",
-  "homepage": "http://www.xueboren.com",
+  "homepage": "http://www.qtrade.com.cn",
   "bugs": {
     "url": "https://github.com/GuiGu0101/webpack-qcloud-cos-plugin/issues/new"
   },
   "repository": "https://github.com/GuiGu0101/webpack-qcloud-cos-plugin.git",
   "license": "MIT",
-  "author": "borenXue <boren.xue@outlook.com> (http://www.xueboren.com)",
+  "author": "Guigu <zyx@class62.cn>",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
