@@ -39,22 +39,22 @@ module.exports = class WebpackQcloudCOSPlugin {
     // 优化级顺序: 项目配置 > 环境变量 > 默认配置
     const envConfig = {
       auth: {
-        SecretId: process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_ID,
-        SecretKey: process.env.WEBPACK_ALIOSS_PLUGIN_ACCESS_KEY_SECRET
+        SecretId: process.env.WEBPACK_QCCOS_PLUGIN_SECRET_ID,
+        SecretKey: process.env.WEBPACK_QCCOS_PLUGIN_SECRET_KEY
       },
       bucket: {
-        Bucket: process.env.WEBPACK_ALIOSS_PLUGIN_BUCKET,
-        Region: process.env.WEBPACK_ALIOSS_PLUGIN_REGION
+        Bucket: process.env.WEBPACK_QCCOS_PLUGIN_BUCKET,
+        Region: process.env.WEBPACK_QCCOS_PLUGIN_REGION
       },
-      enableLog: extraEnvBoolean(process.env.WEBPACK_ALIOSS_PLUGIN_ENABLE_LOG),
+      enableLog: extraEnvBoolean(process.env.WEBPACK_QCCOS_PLUGIN_ENABLE_LOG),
       ignoreError: extraEnvBoolean(
-        process.env.WEBPACK_ALIOSS_PLUGIN_IGNORE_ERROR
+        process.env.WEBPACK_QCCOS_PLUGIN_IGNORE_ERROR
       ),
       removeMode: extraEnvBoolean(
-        process.env.WEBPACK_ALIOSS_PLUGIN_REMOVE_MODE
+        process.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE
       ),
-      cosBaseDir: process.env.WEBPACK_ALIOSS_PLUGIN_OSS_BASE_DIR,
-      prefix: process.env.WEBPACK_ALIOSS_PLUGIN_PREFIX
+      cosBaseDir: process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR,
+      prefix: process.env.WEBPACK_QCCOS_PLUGIN_PREFIX
     };
     this.config = _.mergeWith(
       _.cloneDeep(defaultConfig),
@@ -70,22 +70,22 @@ module.exports = class WebpackQcloudCOSPlugin {
     this.debug("环境变量配置:", envConfig);
     this.debug("项目配置:", cfg);
     this.debug("最终使用的配置:", this.config);
-    // 初始化阿里云 OSS 客户端
+    // 初始化腾讯云 COS 客户端
     this.client = new COS(this.config.auth);
   }
 
   apply(compiler) {
     compiler.plugin("emit", (compilation, cb) => {
       const files = this.pickupAssetsFiles(compilation);
-      log(`${green("\nOSS 上传开始......")}`);
+      log(`${green("\nCOS 上传开始......")}`);
       this.uploadFiles(files, compilation)
         .then(() => {
-          log(`${green("OSS 上传完成\n")}`);
+          log(`${green("COS 上传完成\n")}`);
           cb();
         })
         .catch(err => {
           log(
-            `${red("OSS 上传出错")}::: ${red(err.code)}-${red(err.name)}: ${red(
+            `${red("COS 上传出错")}::: ${red(err.code)}-${red(err.name)}: ${red(
               err.message
             )}`
           );
@@ -111,7 +111,7 @@ module.exports = class WebpackQcloudCOSPlugin {
         this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
       }
     }
-    this.debug("使用的 OSS 目录:", this.finalPrefix);
+    this.debug("使用的 COS 目录:", this.finalPrefix);
     return this.finalPrefix;
   }
   uploadFiles(files, compilation) {
@@ -318,8 +318,8 @@ function configMergeCustomizer(objVal, srcVal) {
 }
 
 function log(...rest) {
-  console.log(chalk.bgMagenta("[webpack-alioss-plugin]:"), ...rest); // eslint-disable-line
+  console.log(chalk.bgMagenta("[webpack-cos-plugin]:"), ...rest); // eslint-disable-line
 }
 function warn(...rest) {
-  console.warn(chalk.bgMagenta("[webpack-alioss-plugin]:"), ...rest); // eslint-disable-line
+  console.warn(chalk.bgMagenta("[webpack-cos-plugin]:"), ...rest); // eslint-disable-line
 }

@@ -17,7 +17,7 @@
     "lint:editconfig": "eclint check --block_comment_start '/**' --block_comment_end '*/'",
     "lint:eslint": "eslint --ext .js src --format html -o ./docs/eslint.html",
     "semantic-release": "semantic-release",
-    "test": "mocha test --recursive --require babel-core/register --reporter mochawesome --reporter-options reportDir=./docs/mocha,reportName=webpack-alioss-plugin,reportTitle=webpack-alioss-plugin,inlineAssets=true"
+    "test": "mocha test --recursive --require babel-core/register --reporter mochawesome --reporter-options reportDir=./docs/mocha,reportName=webpack-cos-plugin,reportTitle=webpack-cos-plugin,inlineAssets=true"
   },
   "husky": {
     "hooks": {
