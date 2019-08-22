@@ -19,11 +19,9 @@ const defaultConfig = {
   },
   retry: 3, // 重试次数: number(>=0)
   existCheck: true, // true: 直接上传、false: 先检测,若已存在则不重新上传(不报错)
-  // prefix 或者 cosBaseDir + project 二选一
   cosBaseDir: "auto_upload_ci",
   project: "",
   version: "",
-  prefix: "",
   exclude: /.*\.html$/,
   enableLog: false,
   ignoreError: false,
@@ -54,8 +52,7 @@ module.exports = class WebpackQcloudCOSPlugin {
       ),
       removeMode: extraEnvBoolean(process.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE),
       useVersion: extraEnvBoolean(process.env.WEBPACK_QCCOS_PLUGIN_USE_VERSION),
-      cosBaseDir: process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR,
-      prefix: process.env.WEBPACK_QCCOS_PLUGIN_PREFIX
+      cosBaseDir: process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR
     };
     this.config = _.mergeWith(
       _.cloneDeep(defaultConfig),
@@ -97,26 +94,20 @@ module.exports = class WebpackQcloudCOSPlugin {
   }
   calcPrefix() {
     if (this.finalPrefix) return this.finalPrefix;
-    // 如果设置了 prefix, 则忽略 cosBaseDir 与 project
-    if (this.config.prefix) {
-      this.finalPrefix = this.config.prefix;
+    // 如果 project 不存在, 则自动提取 package.json 中的 name 字段
+    this.config.project = this.config.project || this.npmProjectName();
+    if (!this.config.project) {
+      // project 获取失败则直接使用 cosBaseDir 作为上传目录
+      warn(`使用默认上传目录: ${this.config.cosBaseDir}`);
+      this.finalPrefix = this.config.cosBaseDir;
     } else {
-      // 使用 cosBaseDir 与 project
-      // 如果 project 不存在, 则自动提取 package.json 中的 name 字段
-      this.config.project = this.config.project || this.npmProjectName();
-      if (!this.config.project) {
-        // project 获取失败则直接使用 cosBaseDir 作为上传目录
-        warn(`使用默认上传目录: ${this.config.cosBaseDir}`);
-        this.finalPrefix = this.config.cosBaseDir;
-      } else {
-        this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
-      }
-      if (this.config.useVersion) {
-        this.config.version = this.config.version || this.npmProjectVersion();
-        if (this.config.version) {
-          // version 获取成功，则添加version
-          this.finalPrefix = `${this.finalPrefix}/${this.config.version}`;
-        }
+      this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
+    }
+    if (this.config.useVersion) {
+      this.config.version = this.config.version || this.npmProjectVersion();
+      if (this.config.version) {
+        // version 获取成功，则添加version
+        this.finalPrefix = `${this.finalPrefix}/${this.config.version}`;
       }
     }
     this.debug("使用的 COS 目录:", this.finalPrefix);
