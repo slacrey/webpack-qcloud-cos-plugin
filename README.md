@@ -33,7 +33,7 @@
 
 ## 安装
 
-```
+```bash
 npm install -D webpack-cos-plugin
 ```
 
@@ -52,7 +52,7 @@ npm install -D webpack-cos-plugin
 // WEBPACK_QCCOS_PLUGIN_REGION 对应配置项 region
 // (可选, 默认为 'auto_upload_ci') WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR 对应配置项 cosBaseDir
 
-const AliOssPlugin = require('webpack-cos-plugin')
+const QcCOSPlugin = require('webpack-cos-plugin')
 
 webpackConfig.plugins.push(new QcCOSPlugin())
 ```
@@ -60,14 +60,16 @@ webpackConfig.plugins.push(new QcCOSPlugin())
 > 用法二: 设置配置项
 
 ```javascript
-const AliOssPlugin = require('webpack-cos-plugin')
+const QcCOSPlugin = require('webpack-cos-plugin')
 
 webpackConfig.plugins.push(new QcCOSPlugin({
   auth: {
     SecretId: '', // 在腾讯 COS 控制台获取
-    SecretKey: '', // 在腾讯 COS 控制台获取
-    region: 'ap-guangzhou', // COS 服务节点, 示例: oss-cn-hangzhou
-    bucket: 'abc', // COS 存储空间, 在腾讯 COS 控制台获取
+    SecretKey: '', // 在腾讯 COS 控制台获取 
+  },
+  bucket: {
+    Bucket: "ap-guangzhou", // COS 服务节点, 示例: oss-cn-hangzhou
+    Region: "sp-124879"// COS 存储空间, 在腾讯 COS 控制台获取
   },
   cosBaseDir: 'auto_upload_ci',
   project: 'my-project-name', // 项目名(用于存放文件的直接目录)
