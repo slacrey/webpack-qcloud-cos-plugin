@@ -32,7 +32,8 @@ describe("参数初始化", function() {
     it("用户参数、默认参数合并: 用户设置所有选项 - 不使用环境变量", function() {
       clearEnv();
       var plugin = new WebpackQcloudCOSPlugin(config);
-      assert(_.isEqual(plugin.config, config), message);
+      // assert(_.isEqual(plugin.config, config), message);
+      assert.deepStrictEqual(plugin.config, config, message);
     });
   });
 
@@ -44,7 +45,7 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_REGION = "004";
       var plugin = new WebpackQcloudCOSPlugin(cfg);
       cfg.bucket.Region = "004";
-      assert(_.isEqual(plugin.config, cfg), message);
+      assert.deepStrictEqual(plugin.config, cfg, message);
     });
   });
 
@@ -67,7 +68,8 @@ describe("参数初始化", function() {
         cosBaseDir: "auto_upload_ci",
         project: ""
       });
-      assert(_.isEqual(plugin.config, config), message);
+      assert.deepStrictEqual(plugin.config, config, message);
+      // assert(_.isEqual(plugin.config, config), message);
     });
   });
 
@@ -79,7 +81,11 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_BUCKET = "003";
       process.env.WEBPACK_QCCOS_PLUGIN_REGION = "004";
       var plugin = new WebpackQcloudCOSPlugin({});
-      assert(_.isEqual(plugin.npmProjectName(), "webpack-cos-plugin"));
+      assert.strictEqual(
+        plugin.npmProjectName(),
+        "webpack-cos-plugin",
+        message
+      );
     });
   });
 
@@ -92,33 +98,32 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_REGION = "004";
       process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR = "default_dir";
       var plugin = new WebpackQcloudCOSPlugin();
-      assert(
-        _.isEqual(plugin.config, {
-          auth: {
-            SecretId: "001",
-            SecretKey: "002"
-          },
-          bucket: {
-            Bucket: "003",
-            Region: "004"
-          },
-          retry: 3,
-          existCheck: true,
-          cosBaseDir: "default_dir",
-          project: "webpack-cos-plugin",
-          version: "",
-          exclude: /.*\.html$/,
-          enableLog: false,
-          ignoreError: false,
-          removeMode: true,
-          useVersion: false,
-          gzip: true,
-          options: undefined
-        }),
-        message
-      );
-      assert(
-        _.isEqual(plugin.finalPrefix, "default_dir/webpack-cos-plugin"),
+      const cfg = {
+        auth: {
+          SecretId: "001",
+          SecretKey: "002"
+        },
+        bucket: {
+          Bucket: "003",
+          Region: "004"
+        },
+        retry: 3,
+        existCheck: true,
+        cosBaseDir: "default_dir",
+        project: "webpack-cos-plugin",
+        version: "",
+        exclude: /.*\.html$/,
+        enableLog: false,
+        ignoreError: false,
+        removeMode: true,
+        useVersion: false,
+        gzip: true,
+        options: undefined
+      };
+      assert.deepStrictEqual(plugin.config, cfg, message);
+      assert.strictEqual(
+        plugin.finalPrefix,
+        "default_dir/webpack-cos-plugin",
         "-"
       );
     });
@@ -133,7 +138,11 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_REGION = "004";
       process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR = "default_dir";
       var plugin = new WebpackQcloudCOSPlugin();
-      assert(_.isEqual(plugin.finalPrefix, "default_dir/webpack-cos-plugin"));
+      assert.strictEqual(
+        plugin.finalPrefix,
+        "default_dir/webpack-cos-plugin",
+        "-"
+      );
     });
   });
 });
