@@ -2,6 +2,7 @@
 
 [![Travis CI](https://img.shields.io/travis/GuiGu0101/webpack-qcloud-cos-plugin/master.svg)](https://travis-ci.org/GuiGu0101/webpack-qcloud-cos-plugin)
 [![node version](https://img.shields.io/node/v/webpack-cos-plugin.svg)](https://nodejs.org)
+[![npm version](https://img.shields.io/npm/v/webpack-cos-plugin.svg)](https://www.npmjs.com/package/webpack-cos-plugin)
 <span style="position:relative;top: -4px;margin-left: 8px;">
   <a target="_blank" href="https://git.io/fjb1l">更新记录</a>
   <a target="_blank" href="https://git.io/fjbHO">测试报告</a>
