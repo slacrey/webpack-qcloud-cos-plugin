@@ -17,11 +17,13 @@ var config = {
   existCheck: true,
   cosBaseDir: "auto_upload_ci",
   project: "",
+  version: "",
   prefix: "aa",
   exclude: /aa.*/,
   enableLog: false,
   ignoreError: true,
   removeMode: false,
+  useVersion: false,
   gzip: true,
   options: "a"
 };
@@ -57,6 +59,7 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_ENABLE_LOG = false;
       process.env.WEBPACK_QCCOS_PLUGIN_IGNORE_ERROR = true;
       process.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE = false;
+      process.env.WEBPACK_QCCOS_PLUGIN_USE_VERSION = false;
       process.env.WEBPACK_QCCOS_PLUGIN_PREFIX = "aa";
       process.env.WEBPACK_QCCOS_PLUGIN_EXCLUDE = /aa.*/;
       var plugin = new WebpackQcloudCOSPlugin({
@@ -130,9 +133,7 @@ describe("参数初始化", function() {
       process.env.WEBPACK_QCCOS_PLUGIN_REGION = "004";
       process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR = "default_dir";
       var plugin = new WebpackQcloudCOSPlugin();
-      assert(
-        _.isEqual(plugin.finalPrefix, "default_dir/webpack-cos-plugin")
-      );
+      assert(_.isEqual(plugin.finalPrefix, "default_dir/webpack-cos-plugin"));
     });
   });
 });

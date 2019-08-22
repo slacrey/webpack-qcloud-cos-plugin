@@ -93,9 +93,11 @@ existCheck | - | `true` | 上传前是否先检测已存在(已存在则不重�
 enableLog | `WEBPACK_QCCOS_PLUGIN_ENABLE_LOG` | false | 是否输出详细的日志信息 |
 ignoreError | `WEBPACK_QCCOS_PLUGIN_IGNORE_ERROR` | false | 上传过程中出现错误是否继续 webpack 构建 |
 removeMode | `WEBPACK_QCCOS_PLUGIN_REMOVE_MODE` | true | 生成的文件自动上传至 COS 后, 是否删除本地的对应文件 |
+useVersion | `WEBPACK_QCCOS_PLUGIN_USE_VERSION` | false | 是否在目录中添加版本号 |
 ~~prefix~~(已弃用) | ~~`WEBPACK_QCCOS_PLUGIN_PREFIX`~~ | ~~false~~ | ~~目录前缀, 文件会上传到该指定目录下, 请确保 `SecretId` 有该目录的写权限~~ |
 cosBaseDir | `WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR` | `auto_upload_ci` | COS 中存放上传文件的一级目录名 |
 project | - | 默认会自动读取 `package.json` 中的 `name` | COS 中存放上传文件的二级目录, 一般为项目名 |
+version | - | 默认会自动读取 `package.json` 中的 `version` | COS 中存放上传文件的三级目录, 一般为版本号，仅在`useVersion`为`true`下有用 |
 options | - | undefined | 对象类型. [可用于设置文件的请求头、超时时间等](https://cloud.tencent.com/document/product/436/36119#.E5.8F.82.E6.95.B0.E8.AF.B4.E6.98.8E2) |
 
 * ~~prefix~~: ~~出于安全考虑推荐不使用根目录, 只给该 `SecretId` 赋予某个子文件夹的权限~~

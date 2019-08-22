@@ -22,11 +22,13 @@ const defaultConfig = {
   // prefix 或者 cosBaseDir + project 二选一
   cosBaseDir: "auto_upload_ci",
   project: "",
+  version: "",
   prefix: "",
   exclude: /.*\.html$/,
   enableLog: false,
   ignoreError: false,
   removeMode: true,
+  useVersion: false,
   gzip: true,
   options: undefined
 };
@@ -50,9 +52,8 @@ module.exports = class WebpackQcloudCOSPlugin {
       ignoreError: extraEnvBoolean(
         process.env.WEBPACK_QCCOS_PLUGIN_IGNORE_ERROR
       ),
-      removeMode: extraEnvBoolean(
-        process.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE
-      ),
+      removeMode: extraEnvBoolean(process.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE),
+      useVersion: extraEnvBoolean(process.env.WEBPACK_QCCOS_PLUGIN_USE_VERSION),
       cosBaseDir: process.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR,
       prefix: process.env.WEBPACK_QCCOS_PLUGIN_PREFIX
     };
@@ -109,6 +110,13 @@ module.exports = class WebpackQcloudCOSPlugin {
         this.finalPrefix = this.config.cosBaseDir;
       } else {
         this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
+      }
+      if (this.config.useVersion) {
+        this.config.version = this.config.version || this.npmProjectVersion();
+        if (this.config.version) {
+          // version 获取成功，则添加version
+          this.finalPrefix = `${this.finalPrefix}/${this.config.version}`;
+        }
       }
     }
     this.debug("使用的 COS 目录:", this.finalPrefix);
@@ -273,6 +281,15 @@ module.exports = class WebpackQcloudCOSPlugin {
     try {
       const pkg = require(path.resolve(process.env.PWD, "package.json"));
       return pkg.name;
+    } catch (e) {
+      return "";
+    }
+  }
+  // 提取所在项目 package.json 中的 version
+  npmProjectVersion() {
+    try {
+      const pkg = require(path.resolve(process.env.PWD, "package.json"));
+      return pkg.version;
     } catch (e) {
       return "";
     }
