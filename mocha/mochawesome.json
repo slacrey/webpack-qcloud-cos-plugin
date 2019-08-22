@@ -1,0 +1,288 @@
+{
+  "stats": {
+    "suites": 7,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2019-08-22T02:28:10.752Z",
+    "end": "2019-08-22T02:28:10.801Z",
+    "duration": 49,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "9da88209-931e-4986-87bc-0f1f65536646",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "b4b88bc8-bbdd-4d97-bace-0b06ee75d321",
+        "title": "参数初始化",
+        "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "d33c2dd7-bece-4e4b-abf2-6678bb0bf21d",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "用户参数、默认参数合并: 用户设置所有选项 - 不使用环境变量",
+                "fullTitle": "参数初始化 #calc-config 用户参数、默认参数合并: 用户设置所有选项 - 不使用环境变量",
+                "timedOut": false,
+                "duration": 4,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nvar plugin = new WebpackQcloudCOSPlugin(config);\nassert(_.isEqual(plugin.config, config), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "8a0ec595-6715-4697-b823-5fcd79a1a867",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "8a0ec595-6715-4697-b823-5fcd79a1a867"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 4,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "9d3466fa-70c5-443d-a49c-299c0d02a5f6",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "用户参数、环境变量、默认参数合并: bucket.Region 使用环境变量",
+                "fullTitle": "参数初始化 #calc-config 用户参数、环境变量、默认参数合并: bucket.Region 使用环境变量",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nvar cfg = _.cloneDeep(config);\ndelete cfg.bucket.Region;\nprocess.env.WEBPACK_QCCOS_PLUGIN_REGION = \"004\";\nvar plugin = new WebpackQcloudCOSPlugin(cfg);\ncfg.bucket.Region = \"004\";\nassert(_.isEqual(plugin.config, cfg), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "8804bece-4b6b-48d5-a7d9-30e466c40e10",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "8804bece-4b6b-48d5-a7d9-30e466c40e10"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 1,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "cdccab41-704b-4f9c-8b56-0be84b464571",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "环境变量、默认参数合并: bucket.Region 使用环境变量",
+                "fullTitle": "参数初始化 #calc-config 环境变量、默认参数合并: bucket.Region 使用环境变量",
+                "timedOut": false,
+                "duration": 2,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_ID = \"001\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_KEY = \"002\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_BUCKET = \"003\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_REGION = \"004\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_ENABLE_LOG = false;\nprocess.env.WEBPACK_QCCOS_PLUGIN_IGNORE_ERROR = true;\nprocess.env.WEBPACK_QCCOS_PLUGIN_REMOVE_MODE = false;\nprocess.env.WEBPACK_QCCOS_PLUGIN_USE_VERSION = false;\nprocess.env.WEBPACK_QCCOS_PLUGIN_PREFIX = \"aa\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_EXCLUDE = /aa.*/;\nvar plugin = new WebpackQcloudCOSPlugin({\n  options: \"a\",\n  exclude: /aa.*/,\n  cosBaseDir: \"auto_upload_ci\",\n  project: \"\"\n});\nassert(_.isEqual(plugin.config, config), message);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "a1c9482f-85d1-4b7a-beb4-c43e54651566",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "a1c9482f-85d1-4b7a-beb4-c43e54651566"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 2,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "9e38a2c4-0f25-42ad-8173-4913b25ef377",
+            "title": "#npmProjectName",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "提取 npm 包名",
+                "fullTitle": "参数初始化 #npmProjectName 提取 npm 包名",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_ID = \"001\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_KEY = \"002\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_BUCKET = \"003\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_REGION = \"004\";\nvar plugin = new WebpackQcloudCOSPlugin({});\nassert(_.isEqual(plugin.npmProjectName(), \"webpack-cos-plugin\"));",
+                "err": {},
+                "isRoot": false,
+                "uuid": "47a8a8e7-7d6c-4ae4-b0c2-9ca8645da5b6",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "47a8a8e7-7d6c-4ae4-b0c2-9ca8645da5b6"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "71a367c0-7ec7-41e1-8bf2-265573ba2f29",
+            "title": "#calc-config",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "环境变量、默认参数合并: 初始化时不传参, eg: new WebpackQcloudCOSPlugin()",
+                "fullTitle": "参数初始化 #calc-config 环境变量、默认参数合并: 初始化时不传参, eg: new WebpackQcloudCOSPlugin()",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_ID = \"001\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_KEY = \"002\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_BUCKET = \"003\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_REGION = \"004\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR = \"default_dir\";\nvar plugin = new WebpackQcloudCOSPlugin();\nassert(_.isEqual(plugin.config, {\n  auth: {\n    SecretId: \"001\",\n    SecretKey: \"002\"\n  },\n  bucket: {\n    Bucket: \"003\",\n    Region: \"004\"\n  },\n  retry: 3,\n  existCheck: true,\n  cosBaseDir: \"default_dir\",\n  project: \"webpack-cos-plugin\",\n  version: \"\",\n  exclude: /.*\\.html$/,\n  enableLog: false,\n  ignoreError: false,\n  removeMode: true,\n  useVersion: false,\n  gzip: true,\n  options: undefined\n}), message);\nassert(_.isEqual(plugin.finalPrefix, \"default_dir/webpack-cos-plugin\"), \"-\");",
+                "err": {},
+                "isRoot": false,
+                "uuid": "2a18e057-c6ea-44fe-904f-2a8159c2ef4a",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "2a18e057-c6ea-44fe-904f-2a8159c2ef4a"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "7cfcee1f-6410-40d5-8222-a90a9a5ff915",
+            "title": "#finalPrefix 计算",
+            "fullFile": "/home/travis/build/GuiGu0101/webpack-qcloud-cos-plugin/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "环境变量、默认参数合并: 初始化时不传参, eg: new WebpackQcloudCOSPlugin()",
+                "fullTitle": "参数初始化 #finalPrefix 计算 环境变量、默认参数合并: 初始化时不传参, eg: new WebpackQcloudCOSPlugin()",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "clearEnv();\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_ID = \"001\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_SECRET_KEY = \"002\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_BUCKET = \"003\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_REGION = \"004\";\nprocess.env.WEBPACK_QCCOS_PLUGIN_COS_BASE_DIR = \"default_dir\";\nvar plugin = new WebpackQcloudCOSPlugin();\nassert(_.isEqual(plugin.finalPrefix, \"default_dir/webpack-cos-plugin\"));",
+                "err": {},
+                "isRoot": false,
+                "uuid": "f2b601b6-1191-4dc6-8aa2-5a54c129ae68",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "f2b601b6-1191-4dc6-8aa2-5a54c129ae68"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2019
+}
