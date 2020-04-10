@@ -94,17 +94,24 @@ module.exports = class WebpackQcloudCOSPlugin {
   }
   calcPrefix() {
     if (this.finalPrefix) return this.finalPrefix;
-    // 如果 project 不存在, 则自动提取 package.json 中的 name 字段
-    this.config.project = this.config.project || this.npmProjectName();
-    if (!this.config.project) {
+    // 如果 project 不存在, 则自动提取 package.json 中的 name 字段	
+	if (!this.config.project || this.config.project === "") {
+		this.config.project = this.npmProjectName();
+	}
+	
+    if (!this.config.project || this.config.project === "") {
       // project 获取失败则直接使用 cosBaseDir 作为上传目录
       warn(`使用默认上传目录: ${this.config.cosBaseDir}`);
       this.finalPrefix = this.config.cosBaseDir;
     } else {
+	  this.config.project = this.npmProjectName();
       this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
     }
     if (this.config.useVersion) {
-      this.config.version = this.config.version || this.npmProjectVersion();
+	  if (!this.config.version || this.config.version === "") {
+	  	this.config.version = this.npmProjectVersion();
+	  }
+      
       if (this.config.version) {
         // version 获取成功，则添加version
         this.finalPrefix = `${this.finalPrefix}/${this.config.version}`;
