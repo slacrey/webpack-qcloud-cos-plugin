@@ -95,23 +95,23 @@ module.exports = class WebpackQcloudCOSPlugin {
   calcPrefix() {
     if (this.finalPrefix) return this.finalPrefix;
     // 如果 project 不存在, 则自动提取 package.json 中的 name 字段	
-	if (!this.config.project || this.config.project === "") {
-		this.config.project = this.npmProjectName();
-	}
-	
+    if (!this.config.project || this.config.project === "") {
+      this.config.project = this.npmProjectName();
+    }
+
     if (!this.config.project || this.config.project === "") {
       // project 获取失败则直接使用 cosBaseDir 作为上传目录
       warn(`使用默认上传目录: ${this.config.cosBaseDir}`);
       this.finalPrefix = this.config.cosBaseDir;
     } else {
-	  this.config.project = this.npmProjectName();
+      this.config.project = this.npmProjectName();
       this.finalPrefix = `${this.config.cosBaseDir}/${this.config.project}`;
     }
     if (this.config.useVersion) {
-	  if (!this.config.version || this.config.version === "") {
-	  	this.config.version = this.npmProjectVersion();
-	  }
-      
+      if (!this.config.version || this.config.version === "") {
+        this.config.version = this.npmProjectVersion();
+      }
+
       if (this.config.version) {
         // version 获取成功，则添加version
         this.finalPrefix = `${this.finalPrefix}/${this.config.version}`;
@@ -142,7 +142,7 @@ module.exports = class WebpackQcloudCOSPlugin {
                   );
                   log(
                     `${green("已存在,免上传")} (上传于 ${timeStr}) ${++i}/${
-                      files.length
+                    files.length
                     }: ${uploadName}`
                   );
                   this.config.removeMode &&
@@ -173,9 +173,9 @@ module.exports = class WebpackQcloudCOSPlugin {
             file.$retryTime++;
             log(
               `开始上传 ${idx}/${fileCount}: ${
-                file.$retryTime > 1
-                  ? "第" + (file.$retryTime - 1) + "次重试"
-                  : ""
+              file.$retryTime > 1
+                ? "第" + (file.$retryTime - 1) + "次重试"
+                : ""
               }`,
               uploadName
             );
@@ -211,7 +211,7 @@ module.exports = class WebpackQcloudCOSPlugin {
           },
           this.config.bucket
         ),
-        function(err, data) {
+        function (err, data) {
           if (err) {
             reject(err);
           } else {
@@ -232,7 +232,7 @@ module.exports = class WebpackQcloudCOSPlugin {
           this.config.bucket,
           opt
         ),
-        function(err, data) {
+        function (err, data) {
           if (err) {
             reject(err);
           } else {
@@ -333,8 +333,8 @@ function configMergeCustomizer(objVal, srcVal) {
 }
 
 function log(...rest) {
-  console.log(chalk.bgMagenta("[webpack-cos-plugin]:"), ...rest); // eslint-disable-line
+  console.log(chalk.bgMagenta("[cos-webpack-plugin]:"), ...rest); // eslint-disable-line
 }
 function warn(...rest) {
-  console.warn(chalk.bgMagenta("[webpack-cos-plugin]:"), ...rest); // eslint-disable-line
+  console.warn(chalk.bgMagenta("[cos-webpack-plugin]:"), ...rest); // eslint-disable-line
 }

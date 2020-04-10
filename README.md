@@ -8,7 +8,7 @@
   <a target="_blank" href="https://git.io/fjbHO">测试报告</a>
   <a target="_blank" href="https://git.io/fjbH3">eslint 报告</a>
 </span>
-
+fork from https://travis-ci.org/GuiGu0101/webpack-qcloud-cos-plugin
 腾讯云 COS 上传插件, 可在 webpack 打包结束后将来 webpack 生成的文件自动上传到 COS 中。
 
 > **特色**
